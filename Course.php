@@ -225,6 +225,14 @@ if ($_SESSION['user_type'] == "Student") {
                     $att4 = $row['Attachment_link_4'];
                     $labid = $row['Lab_Report_ID'];
 
+                    $submitted_report = mysqli_query($con, "SELECT * FROM `lab_report_submissions` WHERE Student_ID = '$student_id' AND Lab_Report_ID = '$labid'");
+
+                    if(mysqli_num_rows($submitted_report) > 0) {
+                        $button_text = "Resubmit Lab Report";
+                    } else {
+                        $button_text = "Submit Lab Report";
+                    }
+
                     $full_link = "<a href='~\..\Lab_Report_Assignments\\$att1'>$att1</a>";
 
                     if ($att2 != "") {
@@ -239,7 +247,7 @@ if ($_SESSION['user_type'] == "Student") {
                     }
                     echo "   <k href='#'>   <div class='btn btn-default break-word' style='dislay:block; word-wrap: break-word; border: 1px solid #F0F0F0;border-left: 4px solid #03407B;'>
   $title ($type) <br> <span style='font-size:8pt'> $ins</span> 
-   <br> <span style='font-size:8pt'>Posted : $posted &nbsp;&nbsp;&nbsp;&nbsp; Deadline :   $deadline   &nbsp;&nbsp;&nbsp;&nbsp;($Marks Marks)  &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<a href='~\..\SubmitLab.php?id=$labid&url=$url' class='btn-sm btn-info' style='margin-left:50px;' id='submit_lab_report_btn'> Submit Lab Report</a><br> Attachments : $full_link </span>  
+   <br> <span style='font-size:8pt'>Posted : $posted &nbsp;&nbsp;&nbsp;&nbsp; Deadline :   $deadline   &nbsp;&nbsp;&nbsp;&nbsp;($Marks Marks)  &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<a href='~\..\SubmitLab.php?id=$labid&url=$url' class='btn-sm btn-info' style='margin-left:50px;' id='submit_lab_report_btn'> $button_text</a><br> Attachments : $full_link </span>  
 </div></k>";
                 }
             }
