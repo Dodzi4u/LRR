@@ -7,7 +7,7 @@ $page = 'Courses+';
 include 'Header.php';
 $student_id = $_SESSION["user_student_id"];
 $group_id = $_SESSION["user_group_id"];
-$c_date = date("Y-m-d H:i");
+$c_date = date("Ymd H:i");
 
 if (!empty($_GET["url"])) {
     $course_url = $_GET["url"];
@@ -31,8 +31,8 @@ if (!empty($_GET["url"])) {
             // also get teaching assistant names(if any)
             $ta_result = mysqli_query($con, "SELECT Full_Name FROM users_table where User_ID in (select TA from course_ta where Course_ID='$course_id');");
             if (mysqli_num_rows($ta_result) == 0) {
-                echo    "  <div class='alert' style='margin-left:20px;border-bottom:2px solid #1D91EF;'> <a href='~\..\Courses.php?course=$url'>
-  Courses > $name ($code) > Lab Reports <br> <span style='font-size:8pt'>Faculty: $faculty  | Year: $academic | Lecturer: $lecturer  </span>
+                echo    "  <div class='alert' style='marginleft:20px;borderbottom:2px solid #1D91EF;'> <a href='~\..\Courses.php?course=$url'>
+  Courses > $name ($code) > Lab Reports <br> <span style='fontsize:8pt'>Faculty: $faculty  | Year: $academic | Lecturer: $lecturer  </span>
        </a></div> ";
             } else {
                 $ta_name = "";
@@ -40,8 +40,8 @@ if (!empty($_GET["url"])) {
                     $ta_name = $ta_name . $row['Full_Name'] . " ";
                 }
                 $ta_name = trim($ta_name);
-                echo    "  <div class='alert' style='margin-left:20px;border-bottom:2px solid #1D91EF;'> <a href='~\..\Courses.php?course=$url'>
-  Courses > $name ($code) > Lab Reports <br> <span style='font-size:8pt'>Faculty: $faculty  | Year: $academic | Lecturer: $lecturer | Teaching Assistant: $ta_name </span>
+                echo    "  <div class='alert' style='marginleft:20px;borderbottom:2px solid #1D91EF;'> <a href='~\..\Courses.php?course=$url'>
+  Courses > $name ($code) > Lab Reports <br> <span style='fontsize:8pt'>Faculty: $faculty  | Year: $academic | Lecturer: $lecturer | Teaching Assistant: $ta_name </span>
        </a></div> ";
             }
         }
@@ -49,17 +49,17 @@ if (!empty($_GET["url"])) {
 }
 ?>
 
-<div class="row" style='margin-left:20px;float:left'>
+<div class="row" style='marginleft:20px;float:left'>
 
     <?php
 
     if (isset($_SESSION['info_ReMarking'])) {
-        echo '<hr><div class="alert alert-info" role="alert" style="float:left;">' . $_SESSION['info_ReMarking'] . '</div>';
+        echo '<hr><div class="alert alertinfo" role="alert" style="float:left;">' . $_SESSION['info_ReMarking'] . '</div>';
         $_SESSION['info_ReMarking'] = null;
     }
 
     if (isset($_SESSION['info_courses'])) {
-        echo '<hr><div class="alert alert-info" role="alert" style="float:left;">' . $_SESSION['info_courses'] . '</div>';
+        echo '<hr><div class="alert alertinfo" role="alert" style="float:left;">' . $_SESSION['info_courses'] . '</div>';
         $_SESSION['info_courses'] = null;
     }
     ?>
@@ -73,48 +73,48 @@ if ($_SESSION['user_type'] == "Student") {
 ?>
     <hr>
 
-    <div class="row" style="width:95%;margin:auto; text-align:left;">
+    <div class="row" style="width:95%;margin:auto; textalign:left;">
 
-        <div class="col-md-9">
+        <div class="colmd9">
 
-            <!-- Nav tabs -->
+            <! Nav tabs >
 
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#menu1">New</a>
+            <ul class="nav navtabs" role="tablist">
+                <li class="navitem">
+                    <a class="navlink active" datatoggle="tab" href="#menu1">New</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu2">Missed</a>
+                <li class="navitem">
+                    <a class="navlink" datatoggle="tab" href="#menu2">Missed</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu3">Submitted</a>
+                <li class="navitem">
+                    <a class="navlink" datatoggle="tab" href="#menu3">Submitted</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu4" id="marked_tab">Marked</a>
+                <li class="navitem">
+                    <a class="navlink" datatoggle="tab" href="#menu4" id="marked_tab">Marked</a>
                 </li>
 
-                <!----------Delete Course Button----------->
+                <!Delete Course Button>
                 <li>
                     <html>
 
                     <body>
 
                         <div class="modal fade" id="delcourse">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h2 class="modal-title">Please confirm!</h2>
-                                        <button type="button" class="close red" data-dismiss="modal">
+                            <div class="modaldialog">
+                                <div class="modalcontent">
+                                    <div class="modalheader">
+                                        <h2 class="modaltitle">Please confirm!</h2>
+                                        <button type="button" class="close red" datadismiss="modal">
                                             <span>&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modalbody">
                                         <p>Are you sure about deleting this course? This action can not be reversed!</p>
                                     </div>
-                                    <div class="modal-footer">
+                                    <div class="modalfooter">
                                         <form method="POST" action="">
-                                            <button type="button" class="btn action-button blue" data-dismiss="modal">Cancel</button>
-                                            <input type="submit" name="submit" class="btn action-button red" value="Delete" />
+                                            <button type="button" class="btn actionbutton blue" datadismiss="modal">Cancel</button>
+                                            <input type="submit" name="submit" class="btn actionbutton red" value="Delete" />
                                         </form>
 
                                     </div>
@@ -124,7 +124,7 @@ if ($_SESSION['user_type'] == "Student") {
         </div>
         <div class="row">
             <div class="col">
-                <button type="button" class="btn action-button red" data-toggle="modal" data-target="#delcourse">Delete Course</button>
+                <button type="button" class="btn actionbutton red" datatoggle="modal" datatarget="#delcourse">Delete Course</button>
             </div>
         </div>
     </div>
@@ -145,28 +145,28 @@ if ($_SESSION['user_type'] == "Student") {
     }
     ?>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery3.2.1.slim.min.js" integrity="sha384KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
-        /*--------------------[ Delete Course Button ]*/
-        .action-button {
-            font-family: 'Pacifico', cursive;
-            font-size: 18px;
+        /*[ Delete Course Button ]*/
+        .actionbutton {
+            fontfamily: 'Pacifico', cursive;
+            fontsize: 18px;
             color: #FFF;
-            text-decoration: none;
+            textdecoration: none;
         }
 
         .red {
-            background-color: #E74C3C;
-            border-bottom: 5px solid #BD3E31;
-            text-shadow: 0px -2px #BD3E31;
+            backgroundcolor: #E74C3C;
+            borderbottom: 5px solid #BD3E31;
+            textshadow: 0px 2px #BD3E31;
         }
 
         .blue {
-            background-color: #4d4dff;
-            border-bottom: 5px solid #4d4dff;
-            text-shadow: 0px -2px #4d4dff;
+            backgroundcolor: #4d4dff;
+            borderbottom: 5px solid #4d4dff;
+            textshadow: 0px 2px #4d4dff;
         }
     </style>
     </body>
@@ -175,8 +175,8 @@ if ($_SESSION['user_type'] == "Student") {
     </li>
     </ul>
 
-    <div class="tab-content">
-        <div id="menu1" class="container tab-pane active"><br>
+    <div class="tabcontent">
+        <div id="menu1" class="container tabpane active"><br>
 
             <?php
 
@@ -204,7 +204,7 @@ if ($_SESSION['user_type'] == "Student") {
                 " WHERE Course_ID=$course_id" .
                 " AND (Deadline > '$c_date' OR Lab_Report_ID IN (SELECT `Lab_Report_ID` FROM `extended_deadlines_table` WHERE Student_ID=$student_id AND Extended_Deadline_Date > '$c_date' AND Lab_Report_ID IN (SELECT Lab_Report_ID FROM lab_reports_table WHERE Course_ID=$course_id)))" .
                 " AND Lab_Report_ID NOT IN (SELECT Lab_Report_ID FROM lab_report_submissions WHERE Course_Group_id IN (SELECT Course_Group_id FROM course_group_members_table WHERE Student_ID=$student_id))" .
-                " ORDER BY Lab_Report_ID DESC";
+                " AND status =0 ORDER BY Lab_Report_ID DESC";
 
             $result1 = mysqli_query($con, $var);
 
@@ -237,9 +237,9 @@ if ($_SESSION['user_type'] == "Student") {
                     if ($att4 != "") {
                         $full_link = $full_link . "| <a href='~\..\Lab_Report_Assignments\\$att4'>$att4</a>";
                     }
-                    echo "   <k href='#'>   <div class='btn btn-default break-word' style='dislay:block; word-wrap: break-word; border: 1px solid #F0F0F0;border-left: 4px solid #03407B;'>
-  $title ($type) <br> <span style='font-size:8pt'> $ins</span> 
-   <br> <span style='font-size:8pt'>Posted : $posted &nbsp;&nbsp;&nbsp;&nbsp; Deadline :   $deadline   &nbsp;&nbsp;&nbsp;&nbsp;($Marks Marks)  &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<a href='~\..\SubmitLab.php?id=$labid&url=$url' class='btn-sm btn-info' style='margin-left:50px;' id='submit_lab_report_btn'> Submit Lab Report</a><br> Attachments : $full_link </span>  
+                    echo "   <k href='#'>   <div class='btn btndefault breakword' style='dislay:block; wordwrap: breakword; border: 1px solid #F0F0F0;borderleft: 4px solid #03407B;'>
+  $title ($type) <br> <span style='fontsize:8pt'> $ins</span> 
+   <br> <span style='fontsize:8pt'>Posted : $posted &nbsp;&nbsp;&nbsp;&nbsp; Deadline :   $deadline   &nbsp;&nbsp;&nbsp;&nbsp;($Marks Marks)  &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<a href='~\..\SubmitLab.php?id=$labid&url=$url' class='btnsm btninfo' style='marginleft:50px;' id='submit_lab_report_btn'> Submit Lab Report</a><br> Attachments : $full_link </span>  
 </div></k>";
                 }
             }
@@ -248,13 +248,13 @@ if ($_SESSION['user_type'] == "Student") {
 
         </div>
 
-        <div id="menu2" class="container tab-pane"><br>
+        <div id="menu2" class="container tabpane"><br>
 
             <?php
             $group_id = $_SESSION['group_id'];
             if ($group_id == "") {
-                $group_id = -1;
-            } // Individual assignment does not require the student to have a group id.  Therefore, the group is an empty string. To make the following SQL statement work properly, initialize the group id to -1.
+                $group_id = 1;
+            } // Individual assignment does not require the student to have a group id.  Therefore, the group is an empty string. To make the following SQL statement work properly, initialize the group id to 1.
             $result  = mysqli_query($con, "SELECT Lab_Report_ID,Marks, `Course_ID`, `Posted_Date`, `Deadline`, `Instructions`, lab_reports_table.Title, `Attachment_link_1`, `Attachment_link_2`, `Attachment_link_3`, `Attachment_link_4`
           FROM `lab_reports_table`
           WHERE 
@@ -295,8 +295,8 @@ Lab_Report_ID not in (select Lab_Report_ID from lab_report_submissions where (St
                         $full_link = $full_link . "| <a href='~\..\Lab_Report_Assignments\\$att4'>$att4</a>";
                     };
 
-                    echo "<div class='btn btn-default break-word' style='dislay:block; word-wrap: break-word; border: 1px solid #F0F0F0;border-left: 4px solid #03407B;'><span class='btn-sm btn-warning' style='margin-left:0px;'>MISSED</span> $title ($marks Marks) <br> <span style='font-size:8pt'> $ins</span> 
-   <br> <span style='font-size:8pt'>Posted: $posted<br> Deadline: $deadline  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br> Attachments : $full_link </span>
+                    echo "<div class='btn btndefault breakword' style='dislay:block; wordwrap: breakword; border: 1px solid #F0F0F0;borderleft: 4px solid #03407B;'><span class='btnsm btnwarning' style='marginleft:0px;'>MISSED</span> $title ($marks Marks) <br> <span style='fontsize:8pt'> $ins</span> 
+   <br> <span style='fontsize:8pt'>Posted: $posted<br> Deadline: $deadline  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br> Attachments : $full_link </span>
 </div>";
                 }
             }
@@ -305,12 +305,12 @@ Lab_Report_ID not in (select Lab_Report_ID from lab_report_submissions where (St
 
         </div>
 
-        <div id="menu3" class="container tab-pane"><br>
+        <div id="menu3" class="container tabpane"><br>
             <?php
 
             $group_id = $_SESSION['group_id'];
             if ($group_id == "") {
-                $group_id = -1;
+                $group_id = 1;
             }  // This fixes "Submitted report not shown" http://118.25.96.118/bugzilla/show_bug.cgi?id=176
 
             $sql_stmt = "SELECT Lab_Report_ID, Marks, `Course_ID`, `Posted_Date`, `Deadline`, `Instructions`, lab_reports_table.Title, `Attachment_link_1`, `Attachment_link_2`, `Attachment_link_3`, `Attachment_link_4`
@@ -336,7 +336,7 @@ Lab_Report_ID not in (select Lab_Report_ID from lab_report_submissions where (St
                     $att4 = $row['Attachment_link_4'];
                     $id = $row['Lab_Report_ID'];
                     if ($c_date < $deadline) {
-                        $submittedx = "<a  href='~\..\SubmitLab.php?id=$id&url=$url' class='btn-sm btn-default'><i class='fa fa-check-circle'></i> Re-Submit </a>";
+                        $submittedx = "<a  href='~\..\SubmitLab.php?id=$id&url=$url' class='btnsm btndefault'><i class='fa facheckcircle'></i> ReSubmit </a>";
                     }
 
                     $full_link = "<a href='~\..\Lab_Report_Assignments\\$att1'>$att1</a>";
@@ -352,9 +352,9 @@ Lab_Report_ID not in (select Lab_Report_ID from lab_report_submissions where (St
                         $full_link = $full_link . "| <a href='~\..\Lab_Report_Assignments\\$att4'>$att4</a>";
                     }
 
-                    echo "   <k href='#'>   <div class='btn btn-default break-word' style='dislay:block; word-wrap: break-word; border: 1px solid #F0F0F0;border-left: 4px solid #03407B;'>
-  $title <br> <span style='font-size:8pt'> $ins</span> 
-   <br> <span style='font-size:8pt'>Posted : $posted  Deadline :   $deadline  ($marks Marks) &nbsp; &nbsp;  $submittedx&nbsp; <span class='btn-sm btn-success' style='margin-left:50px;'><i class='fa fa-Edit-circle'></i>  Submitted </span>
+                    echo "   <k href='#'>   <div class='btn btndefault breakword' style='dislay:block; wordwrap: breakword; border: 1px solid #F0F0F0;borderleft: 4px solid #03407B;'>
+  $title <br> <span style='fontsize:8pt'> $ins</span> 
+   <br> <span style='fontsize:8pt'>Posted : $posted  Deadline :   $deadline  ($marks Marks) &nbsp; &nbsp;  $submittedx&nbsp; <span class='btnsm btnsuccess' style='marginleft:50px;'><i class='fa faEditcircle'></i>  Submitted </span>
 <br> Submitted files: ";
 
                     $Sub_result = mysqli_query($con, "SELECT `Submission_ID`, `Submission_Date`, lab_report_submissions.Lab_Report_ID,
@@ -416,7 +416,7 @@ where Lab_Report_ID=$lab_repo_id and (lab_report_submissions.Student_id='$studen
         }
         ?>
 
-        <div id="menu4" class="container tab-pane"><br>
+        <div id="menu4" class="container tabpane"><br>
             <?php
             $resultx  = mysqli_query($con, "SELECT `Submission_ID`, `Submission_Date`, lab_reports_table.`Lab_Report_ID`, `Student_id`, "
                 . "`Course_Group_id`, `Notes`, lab_report_submissions.`Marks`,
@@ -457,13 +457,13 @@ where Lab_Report_ID=$lab_repo_id and (lab_report_submissions.Student_id='$studen
                     $remarking_reason = $row['Remarking_Reason'];
                     if ($status == 'Marked') {
                         $rm_data = "\Script.php?remarking=yes&id=$Submission_ID&url=$url&status=Remarking";
-                        $remarking = "<button  onclick='remarking(\"$rm_data\")' class='btn-sm btn-success' id='request_remarking_btn'>  Request Remarking </button>";
+                        $remarking = "<button  onclick='remarking(\"$rm_data\")' class='btnsm btnsuccess' id='request_remarking_btn'>  Request Remarking </button>";
                     }
                     if ($status == 'Remarking') {
-                        $remarking = "<span  style='color:orange'><i class='fa fa-info-circle'></i> Remarking Request sent </span> <br> Remarking Reason:<i>$remarking_reason </i> <br>";
+                        $remarking = "<span  style='color:orange'><i class='fa fainfocircle'></i> Remarking Request sent </span> <br> Remarking Reason:<i>$remarking_reason </i> <br>";
                     }
 
-                    echo "   <k href='#'>   <div class='btn btn-default break-word' style='dislay:block; word-wrap: break-word; border: 1px solid #F0F0F0;border-left: 4px solid #03407B;'>
+                    echo "   <k href='#'>   <div class='btn btndefault breakword' style='dislay:block; wordwrap: breakword; border: 1px solid #F0F0F0;borderleft: 4px solid #03407B;'>
   $title  <b> ($marks Marks out of $Originalmarks)</b><br><small> Lecturer Feedback : $notes </small> &nbsp; $remarking   <br> Submission files :";
 
                     $Sub_result = mysqli_query($con, "SELECT `Submission_ID`, `Submission_Date`, lab_report_submissions.Lab_Report_ID,
@@ -511,7 +511,7 @@ where Lab_Report_ID=$lab_repo_id and (lab_report_submissions.Student_id='$studen
 
     </div>
 
-    <div class="col-md-3">
+    <div class="colmd3">
         <h3>Class Groups</h3>
 
         <?php
@@ -520,7 +520,7 @@ where Lab_Report_ID=$lab_repo_id and (lab_report_submissions.Student_id='$studen
             $count_groups = $row['Course_Group_id'];
         }
 
-        echo " <button onclick='CreateGroup()' class='btn btn-primary' id='create_group_btn'> Create Group</button>";
+        echo " <button onclick='CreateGroup()' class='btn btnprimary' id='create_group_btn'> Create Group</button>";
 
         ?>
 
@@ -540,13 +540,13 @@ course_groups_table.Course_Group_id=course_group_members_table.Course_Group_id W
                 $id = $row['Course_Group_id'];
                 $status = $row['Status'];
 
-                $extra = " -  <a href='#' class='' onclick='invite($id)'> Invite Others</a></small>";
+                $extra = "   <a href='#' class='' onclick='invite($id)'> Invite Others</a></small>";
 
                 if ($status == "Invited") {
                     $extra2 = "   <a href='#' class='' onclick='accept($id,1)'>Accept</a></small>";
                     $extra3 = "   <a href='#' class='' onclick='accept($id,0)'>Decline</a></small>";
                 }
-                echo "<div  class='btn-default'><small> $name ($status)  $extra  $extra2  $extra3</small></div>";
+                echo "<div  class='btndefault'><small> $name ($status)  $extra  $extra2  $extra3</small></div>";
 
                 $rs2 = mysqli_query($con, "SELECT `ID`, `Course_Group_id`, course_group_members_table.Student_ID, 
                             course_group_members_table.`Status`,users_table.Full_Name FROM `course_group_members_table` 
@@ -559,7 +559,7 @@ where course_group_members_table.Course_Group_id=$id");
                     $status = $row['Status'];
                     $Student_ID = $row['Student_ID'];
 
-                    echo "<li><small> $name-$Student_ID ($status)</small></li>";
+                    echo "<li><small> $name$Student_ID ($status)</small></li>";
                 }
             }
         }
@@ -574,9 +574,9 @@ where course_group_members_table.Course_Group_id=$id");
 include 'Footer.php';
 ?>
 
-<script src="./css/jquery-1.11.1.min.js"></script>
-<script src="./css/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="./css/jquery-ui.css" />
+<script src="./css/jquery1.11.1.min.js"></script>
+<script src="./css/jqueryui.min.js"></script>
+<link rel="stylesheet" href="./css/jqueryui.css" />
 
 <script>
     function CreateGroup() {

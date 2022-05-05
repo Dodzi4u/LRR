@@ -7,7 +7,7 @@ $page = 'Courses+';
 include 'Header.php';
 $student_id = $_SESSION["user_student_id"];
 $group_id = $_SESSION["user_group_id"];
-$c_date = date("Y-m-d H:i");
+$c_date = date("Ymd H:i");
 
 if (!empty($_GET["id"])) {
     $id = $_GET["id"];
@@ -32,30 +32,30 @@ while ($row = mysqli_fetch_assoc($resultx1)) {
     $url = $row['URL'];
 }
 
-echo "<div class='alert' style='margin-left:20px;border-bottom:2px solid #1D91EF;'> <a href='Courses.php?course=$url'>
+echo "<div class='alert' style='marginleft:20px;borderbottom:2px solid #1D91EF;'> <a href='Courses.php?course=$url'>
  $header 
 </a></div>
  ";
 
 ?>
 
-<div class="row" style="width:80%;margin:auto; text-align:left;">
+<div class="row" style="width:80%;margin:auto; textalign:left;">
 
-    <!--    Lecturer  CODE-->
+    <!    Lecturer  CODE>
     <?php
 
     if ($_SESSION['user_type'] == "Lecturer" || $_SESSION['user_type'] == "TA") {
 
     ?>
 
-        <div class="col-md-12">
+        <div class="colmd12">
 
             <?php
 
-            error_reporting(0);
+            error_reporting);
 
             if (isset($_SESSION['info_Marking'])) {
-                echo  '<hr><div class="alert alert-info" role="alert">' . $_SESSION['info_Marking'] . '</div>';
+                echo  '<hr><div class="alert alertinfo" role="alert">' . $_SESSION['info_Marking'] . '</div>';
                 $_SESSION['info_Marking'] = null;
             }
 
@@ -94,25 +94,25 @@ echo "<div class='alert' style='margin-left:20px;border-bottom:2px solid #1D91EF
             ?>
 
             <b>Lab Report Submissions (<?php echo $count_subs; ?>)</b>
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#menu1">Un-Marked Submissions<b> (<?php echo $count_unmarked; ?>)</b></a>
+            <! Nav tabs >
+            <ul class="nav navtabs" role="tablist">
+                <li class="navitem">
+                    <a class="navlink active" datatoggle="tab" href="#menu1">UnMarked Submissions<b> (<?php echo $count_unmarked; ?>)</b></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu2">Marked Submissions <b>(<?php echo $count_marked; ?>)</b></a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu3">Re-Marking Requests <b>(<?php echo $count_remark; ?>)</b></a>
+                <li class="navitem">
+                    <a class="navlink" datatoggle="tab" href="#menu2">Marked Submissions <b>(<?php echo $count_marked; ?>)</b></a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu4"> View Course Groups</a>
+                <li class="navitem">
+                    <a class="navlink" datatoggle="tab" href="#menu3">ReMarking Requests <b>(<?php echo $count_remark; ?>)</b></a>
+                </li>
+
+                <li class="navitem">
+                    <a class="navlink" datatoggle="tab" href="#menu4"> View Course Groups</a>
                 </li>
             </ul>
-            <div class="tab-content">
-                <div id="menu1" class="container tab-pane active"><br>
+            <div class="tabcontent">
+                <div id="menu1" class="container tabpane active"><br>
 
                     <?php
 
@@ -137,7 +137,7 @@ where Lab_Report_ID=$id and lab_report_submissions.Status='Pending' order by Sub
                     }
 
                     if (mysqli_num_rows($result1) == 0) {
-                        echo "No Un-Marked Submissions for this Lab Report.";
+                        echo "No UnMarked Submissions for this Lab Report.";
                     } else {
                         $mark_submission_btn_counter = 0;
                         while ($row = mysqli_fetch_assoc($result1)) {
@@ -184,9 +184,9 @@ where Lab_Report_ID=$id and lab_report_submissions.Status='Pending' order by Sub
                                 $full_link = $full_link . " | <a href='~\..\Download.php?file=$att4&attachment=4'>$base_att4</a>";
                             }
 
-                            echo "   <k href='#'>   <div class='btn btn-default break-word' style='dislay:block; word-wrap: break-word; border: 1px solid #F0F0F0;border-left: 4px solid #03407B;'>
+                            echo "   <k href='#'>   <div class='btn btndefault breakword' style='dislay:block; wordwrap: breakword; border: 1px solid #F0F0F0;borderleft: 4px solid #03407B;'>
   $title  <br> by: <b> $submitted_by </b>
-   <br> <span style='font-size:8pt'>Submitted : $posted   <button class='btn-sm btn-info' style='margin-left:50px;' onclick='mark($Submission_ID,\"$title\",$total)' id='mark_submission_btn_$mark_submission_btn_counter'>  Mark Submission</button><br> Attachments : $full_link </span>  
+   <br> <span style='fontsize:8pt'>Submitted : $posted   <button class='btnsm btninfo' style='marginleft:50px;' onclick='mark($Submission_ID,\"$title\",$total)' id='mark_submission_btn_$mark_submission_btn_counter'>  Mark Submission</button><br> Attachments : $full_link </span>  
 </div></k>";
                         }
                     }
@@ -195,7 +195,7 @@ where Lab_Report_ID=$id and lab_report_submissions.Status='Pending' order by Sub
 
                 </div>
 
-                <div id="menu2" class="container tab-pane"><br>
+                <div id="menu2" class="container tabpane"><br>
 
                     <?php
 
@@ -222,7 +222,7 @@ where Lab_Report_ID=$id and lab_report_submissions.Status='Marked'  Order by lab
                         echo "No Marked submissions for this lab";
                     } else {
 
-                        echo "<h3><a href='~\..\Script.php?exportgrade=true&lab=$id&lab_name=$Report_Title'><i class='fa fa-book'></i> Export Grade Sheet </a></h3>";
+                        echo "<h3><a href='~\..\Script.php?exportgrade=true&lab=$id&lab_name=$Report_Title'><i class='fa fabook'></i> Export Grade Sheet </a></h3>";
 
                         while ($row = mysqli_fetch_assoc($result)) {
                             $title = $row['Title'];
@@ -264,9 +264,9 @@ where Lab_Report_ID=$id and lab_report_submissions.Status='Marked'  Order by lab
                             if ($att4 != "") {
                                 $full_link = $full_link . "| <a href='~\..\Lab_Report_Submisions\\$att4'>$att4</a>";
                             }
-                            echo "   <k href='#'>   <div class='btn btn-default break-word' style='dislay:block; word-wrap: break-word; border: 1px solid #F0F0F0;border-left: 4px solid #03407B;'>
-  $title  <br> by : <b> $submitted_by  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; [ Marked $Marks ] </b>  &nbsp; Visibility : <b>$Visibility </b>  <button class='btn-sm btn-success' style='margin-left:50px;' onclick='updatev($Submission_ID)'>Update visibility</button> 
-   <hr> Lecturer/TA notes : $notes<br> <span style='font-size:8pt'>Submitted : $posted        <b>  </b> <button class='btn-sm btn-info' style='margin-left:50px;' onclick='mark($Submission_ID,\"$title\",$total)'>  Re-Mark Submission</button><br> Attachments : $full_link </span>  
+                            echo "   <k href='#'>   <div class='btn btndefault breakword' style='dislay:block; wordwrap: breakword; border: 1px solid #F0F0F0;borderleft: 4px solid #03407B;'>
+  $title  <br> by : <b> $submitted_by  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; [ Marked $Marks ] </b>  &nbsp; Visibility : <b>$Visibility </b>  <button class='btnsm btnsuccess' style='marginleft:50px;' onclick='updatev($Submission_ID)'>Update visibility</button> 
+   <hr> Lecturer/TA notes : $notes<br> <span style='fontsize:8pt'>Submitted : $posted        <b>  </b> <button class='btnsm btninfo' style='marginleft:50px;' onclick='mark($Submission_ID,\"$title\",$total)'>  ReMark Submission</button><br> Attachments : $full_link </span>  
 </div></k>";
                         }
                     }
@@ -275,7 +275,7 @@ where Lab_Report_ID=$id and lab_report_submissions.Status='Marked'  Order by lab
 
                 </div>
 
-                <div id="menu3" class="container tab-pane"><br>
+                <div id="menu3" class="container tabpane"><br>
 
                     <?php
 
@@ -343,11 +343,11 @@ where Lab_Report_ID=$id and lab_report_submissions.Status='Remarking'");
                             if ($att4 != "") {
                                 $full_link = $full_link . "| <a href='~\..\Lab_Report_Submisions\\$att4'>$att4</a>";
                             }
-                            echo "   <k href='#'>   <div class='btn btn-default break-word' style='dislay:block; word-wrap: break-word; border: 1px solid #F0F0F0;border-left: 4px solid #03407B;'>
+                            echo "   <k href='#'>   <div class='btn btndefault breakword' style='dislay:block; wordwrap: breakword; border: 1px solid #F0F0F0;borderleft: 4px solid #03407B;'>
   $title  <br> by : <b> $submitted_by  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; [ Marked $Marks ] </b> <br> Remarking Reason : <b>$remarking_reason </b>
-   <hr> <span style='font-size:8pt'>Submitted : $posted        <b>  </b> "
-                                . "<button class='btn-sm btn-info' style='margin-left:50px;' onclick='mark($Submission_ID,\"$title\",$total)'>  Re-Mark Submission</button>"
-                                . " &nbsp; &nbsp;&nbsp;&nbsp;<a href='~\..\Script.php?ignoreremarking=yes&id=$id&subid=$Submission_ID&header=$header&total=$total&status=Marked' class='btn-sm btn-warning'>  Ignore Request </a>"
+   <hr> <span style='fontsize:8pt'>Submitted : $posted        <b>  </b> "
+                                . "<button class='btnsm btninfo' style='marginleft:50px;' onclick='mark($Submission_ID,\"$title\",$total)'>  ReMark Submission</button>"
+                                . " &nbsp; &nbsp;&nbsp;&nbsp;<a href='~\..\Script.php?ignoreremarking=yes&id=$id&subid=$Submission_ID&header=$header&total=$total&status=Marked' class='btnsm btnwarning'>  Ignore Request </a>"
                                 . "<br> Attachments : $full_link </span>  
 </div></k>";
                         }
@@ -357,7 +357,7 @@ where Lab_Report_ID=$id and lab_report_submissions.Status='Remarking'");
 
                 </div>
 
-                <div id="menu4" class="container tab-pane"><br>
+                <div id="menu4" class="container tabpane"><br>
 
                     <h3>Course Groups</h3>
 
@@ -377,7 +377,7 @@ WHERE Course_id=$c_id");
                             $leader = $row['Full_Name'] . "(" . $row['Group_Leader'] . ")";
                             $id = $row['Course_Group_id'];
 
-                            echo "<div  class='btn-default'><small> $name -  Leader : $leader </small></div>";
+                            echo "<div  class='btndefault'><small> $name   Leader : $leader </small></div>";
 
                             $rs2 = mysqli_query($con, "SELECT `ID`, `Course_Group_id`, course_group_members_table.Student_ID, 
                             course_group_members_table.`Status`,users_table.Full_Name FROM `course_group_members_table` 
@@ -390,7 +390,7 @@ where course_group_members_table.Course_Group_id=$id");
                                 $status = $row['Status'];
                                 $Student_ID = $row['Student_ID'];
 
-                                echo "<li><small> $name-$Student_ID ($status)</small></li>";
+                                echo "<li><small> $name$Student_ID ($status)</small></li>";
                             }
                         }
                     }
@@ -409,18 +409,18 @@ where course_group_members_table.Course_Group_id=$id");
     include 'Footer.php';
 ?>
 
-<script src="http://118.25.96.118/nor/css/jquery-1.11.1.min.js"></script>
+<script src="http://118.25.96.118/nor/css/jquery1.11.1.min.js"></script>
 
-<script src="http://118.25.96.118/nor/css/jquery-ui.min.js"></script>
+<script src="http://118.25.96.118/nor/css/jqueryui.min.js"></script>
 
-<link rel="stylesheet" href="http://118.25.96.118/nor/css/jquery-ui.css" />
+<link rel="stylesheet" href="http://118.25.96.118/nor/css/jqueryui.css" />
 
 <script>
     function mark(id, title, marks) {
 
         try {
 
-            $('<form id="submit-form" method="get" action="Script.php">' + title + '(' + marks + ' marks) <input type="hidden" name="savemarks" value="true">\n\
+            $('<form id="submitform" method="get" action="Script.php">' + title + '(' + marks + ' marks) <input type="hidden" name="savemarks" value="true">\n\
  <input type="hidden" name="total" value="' + marks + '" > <input type="hidden" name="id" value="' + id + '" ><br> Marks <input type="text" name="marks" id="marks">\n\
  Comments <textarea name="feedback" id="feedback"></textarea>  \n\
 <input type="hidden" name="labid" value="<?php echo $course_id; ?>"> <input type="hidden" name="header" value="<?php echo $header; ?>">  </form>').dialog({
@@ -428,7 +428,7 @@ where course_group_members_table.Course_Group_id=$id");
                 title: 'Mark Submission',
                 buttons: {
                     'Submit Marking': function() {
-                        $('#submit-form').submit();
+                        $('#submitform').submit();
 
                         $(this).dialog('close');
                     },
@@ -449,7 +449,7 @@ where course_group_members_table.Course_Group_id=$id");
 
         try {
 
-            $('<form id="submit-form" method="get" action="Script.php"> <input type="hidden" name="updatevisibility" value="true">\n\
+            $('<form id="submitform" method="get" action="Script.php"> <input type="hidden" name="updatevisibility" value="true">\n\
  <input type="hidden" name="id" value="' + id + '" > <br>\n\
 Update Visibility<br><select name="status"> <option> Public </option><option>Private</option> </select>  \n\
 <input type="hidden" name="labid" value="<?php echo $id; ?>"> <input type="hidden" name="total" value="<?php echo $total; ?>" > <input type="hidden" name="header" value="<?php echo $header; ?>">  </form>').dialog({
@@ -457,7 +457,7 @@ Update Visibility<br><select name="status"> <option> Public </option><option>Pri
                 title: 'Update Report Visibility',
                 buttons: {
                     'Update': function() {
-                        $('#submit-form').submit();
+                        $('#submitform').submit();
                         $(this).dialog('close');
                     },
                     'X': function() {

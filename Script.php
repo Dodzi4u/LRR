@@ -1,11 +1,11 @@
 <?php
 include 'NoDirectPhpAcess.php';
 ?>
-
+ 
 <?php
 
 /* 
- * This file contains the main Server-side scripts for the project.
+ * This file contains the main Serverside scripts for the project.
  */
 
 session_start();
@@ -21,7 +21,7 @@ if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-error_reporting(0);
+error_reporting);
 
 // #### FUNCTION CHECK FILE TYPES ////
 
@@ -90,9 +90,9 @@ if (!empty($_POST["form_signup"])) {
         return;
     }
 
-    $upperLetter     = preg_match('@[A-Z]@',    $password);
-    $smallLetter     = preg_match('@[a-z]@',    $password);
-    $containsDigit   = preg_match('@[0-9]@',    $password);
+    $upperLetter     = preg_match('@[AZ]@',    $password);
+    $smallLetter     = preg_match('@[az]@',    $password);
+    $containsDigit   = preg_match('@[09]@',    $password);
     $containsSpecial = preg_match('@[^\w]@',    $password);
     $containsAll = $upperLetter && $smallLetter && $containsDigit && $containsSpecial;
 
@@ -112,13 +112,13 @@ if (!empty($_POST["form_signup"])) {
         header("Location: signup.php");
         return;
     }
-
+ 
     // apply password_hash()
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO `users_table`(`Email`, `Password`, `Full_Name`, `UserType`, `Student_ID`) VALUES "
         . "('$email','$password_hash','$fullname','Student','$student_id')";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
         header("Location: Courses.php");
     } else {
         echo "Something really bad (SQL insertion error) happened during sign up.";
@@ -129,7 +129,7 @@ if (!empty($_POST["form_signup"])) {
 
 if (!empty($_POST["frm_login"])) {
 
-    $user = mysqli_real_escape_string($con, $_POST["user"]); // user could be a 12-digit student number or an email address
+    $user = mysqli_real_escape_string($con, $_POST["user"]); // user could be a 12digit student number or an email address
     $is_student_number = 0;
 
     // Validate student number
@@ -152,9 +152,10 @@ if (!empty($_POST["frm_login"])) {
         header("Location: index.php");
     } else {
         while ($row = mysqli_fetch_assoc($result)) {
+          
             //  verify the hashed password and unhashed password
             $sha512pass = hash('sha512', $password); // for backward compatibility.  Old passwords were hashed using SHA512 algorithm.
-            if (password_verify($password, $row["Password"]) or $sha512pass == $row["HashPassword"]) {
+            if ($password == $row["Password"] ) { //or $sha512pass == $row["HashPassword"]) {
 
                 $_SESSION['user_id'] = $row['User_ID'];
                 $_SESSION['user_email'] = $row['Email'];
@@ -249,14 +250,14 @@ if (!empty($_POST["frm_reset_password"])) {
                 // Password Update
                 $hashed_password = hash('sha512', $password);
                 $sql = "UPDATE users_table set HashPassword='$hashed_password' where User_ID=$userid;";
-                if ($con->query($sql) === TRUE) {
+                if ($con>query($sql) === TRUE) {
 
-                    error_reporting(0);
+                    error_reporting);
 
                     $_SESSION["info_login"] = " Password changed successfully , you can login now with your new password ";
                     header("Location: index.php");
                 } else {
-                    echo "Error: " . $sql . "<br>" . $con->error;
+                    echo "Error: " . $sql . "<br>" . $con>error;
                 }
             } else {
                 echo "Invalid Token ";
@@ -282,11 +283,11 @@ if (!empty($_POST["frm_createlecturrer"])) {
     $sql= "INSERT INTO `users_table`(`Email`, `Password`, `Full_Name`, `UserType`) VALUES "
         . "('$email','$password','$fullname','$type')";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
         $_SESSION["info_Admin_Users"] = $type . " user Created successfully : email " . $email . " and $password as Password.";
         header("Location: Admin.php");
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -353,7 +354,7 @@ if (!empty($_POST["frm_uploadlab"])) {
     $type = mysqli_real_escape_string($con, $_POST["type"]);
 
     $deadline = $deadlinedate . " " . $deadlinetime;
-    $date =  date("Y-m-d H:i:s");
+    $date =  date("Ymd H:i:s");
 
     // GET UPLOADED FILES
 
@@ -432,12 +433,12 @@ if (!empty($_POST["frm_uploadlab"])) {
                      `Title`, `Attachment_link_1`, `Attachment_link_2`, `Attachment_link_3`, `Attachment_link_4`,Marks,Type) 
                      VALUES ('$course_id','$date','$deadline','$instructions','$title','$targetfile','$targetfile2','$targetfile3','$targetfile3',$marks,'$type')";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
 
         $_SESSION["info_courses"] = $type . " lab report assignment posted successfully.";
         header("Location: Courses.php?course=" . $url);
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -466,7 +467,7 @@ if (!empty($_POST["frm_submitlab"])) {
     $url = mysqli_real_escape_string($con, $_POST["url"]);
 
     $deadline = $deadlinedate . " " . $deadlinetime;
-    $date = date("Y-m-d H:i:s");
+    $date = date("Ymd H:i:s");
 
     // GET UPLOADED FILES
     $labName = mysqli_query($con, "SELECT * FROM `lab_reports_table` WHERE Lab_Report_ID=$lab_id");
@@ -574,7 +575,7 @@ if (!empty($_POST["frm_submitlab"])) {
     }
 
     $sql1 = "DELETE FROM lab_report_submissions where Lab_Report_ID=$lab_id and Student_id=$student_id and Course_Group_id=$group_id";
-    if ($con->query($sql1) === TRUE) {
+    if ($con>query($sql1) === TRUE) {
     }
 
     $sql = "INSERT INTO `lab_report_submissions`(`Submission_Date`, `Lab_Report_ID`, `Student_id`,"
@@ -582,15 +583,23 @@ if (!empty($_POST["frm_submitlab"])) {
         . " VALUES ('$date',$lab_id,$student_id,$group_id,'$targetfile','$instructions','$targetfile2','$targetfile3','$targetfile4',"
         . "'Pending','$title','')";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
         if ($_SESSION['Sub_Type'] == 'Individual') {
-            $con->query($sql = "UPDATE `lab_report_submissions` SET `Course_Group_id` = '0' WHERE `lab_report_submissions`.`Lab_Report_ID` = '$lab_id'");
+            $con>query($sql = "UPDATE `lab_report_submissions` SET `Course_Group_id` = '0' WHERE `lab_report_submissions`.`Lab_Report_ID` = '$lab_id'");
         }
 
+               
+        //hacked:  update the submissison so that its don't show in new
+
+        if ($_SESSION['Sub_Type'] == 'Individual') {
+            $con>query($sql = "UPDATE `lab_reports_table` SET `status` = 1 WHERE `lab_reports_table`.`Lab_Report_ID` = '$lab_id'");
+        }
+
+      
         $_SESSION["info_courses"] = "Thanks.  Your lab report assignment is submitted successfully.";
         header("Location: Course.php?url=" . $url);
     } else {
-        echo "Error: <br>" . $con->error;
+        echo "Error: <br>" . $con>error;
     }
 }
 
@@ -608,7 +617,7 @@ if (!empty($_GET["JoinCourse"])) {
 
     $sql = "INSERT INTO `course_students_table`(`Course_ID`, `Student_ID`,`Status`) VALUES ('$id','$student_id','$status')";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
 
         if ($joining == 0) {
             $_SESSION["info_Courses_student"] = "You enrolled in this course successfully.";
@@ -618,7 +627,7 @@ if (!empty($_GET["JoinCourse"])) {
 
         header("Location: Courses.php");
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -638,7 +647,7 @@ if (!empty($_GET["savemarks"])) {
         echo " Marks could not be greater than total";
         return;
     }
-    $date =  date("Y-m-d H:i:s");
+    $date =  date("Ymd H:i:s");
     $feedback = "<br>@$date : " . $feedback;
 
     $sql = "UPDATE `lab_report_submissions` SET `Marks`='$marks',`Status`='$status',"
@@ -648,12 +657,12 @@ if (!empty($_GET["savemarks"])) {
         . " WHERE Submission_ID=$id
               ";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
 
         $_SESSION["info_Marking"] = "Lab Report Submission Marked";
         header("Location: Submissions.php?id=" . $labid . "&header=" . $header . "&total=" . $total);
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -670,12 +679,12 @@ if (!empty($_GET["updatevisibility"])) {
     $sql = "UPDATE `lab_report_submissions` SET `Visibility`='$status' WHERE Submission_ID=$id
               ";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
 
         $_SESSION["info_Marking"] = "Lab Report Visibility Updated";
         header("Location: Submissions.php?id=" . $labid . "&header=" . $header . "&total=" . $total);
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -692,12 +701,12 @@ if (!empty($_GET["remarking"])) {
     $sql = "UPDATE `lab_report_submissions` SET `Status`='Remarking',Remarking_Reason='$details' WHERE Submission_ID=$id
               ";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
 
         $_SESSION["info_ReMarking"] = "Remarking Request Sent";
         header("Location: Course.php?url=" . $url);
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -713,7 +722,7 @@ if (!empty($_GET["creategroup"])) {
     $sql = "INSERT INTO `course_groups_table`(`Group_Name`, 
                   `Group_Leader`, `Course_id`) VALUES ('$name',$student_id,$id)";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
 
         $resultx1 = mysqli_query($con, "Select Max(Course_Group_id) as cnt from course_groups_table");
         while ($row = mysqli_fetch_assoc($resultx1)) {
@@ -722,18 +731,18 @@ if (!empty($_GET["creategroup"])) {
 
         $sql = "INSERT INTO `course_group_members_table`( `Course_Group_id`, `Student_ID`, `Status`) 
                           VALUES ($gid,$student_id,'Created')";
-        if ($con->query($sql) === TRUE) {
+        if ($con>query($sql) === TRUE) {
             $_SESSION["info_ReMarking"] = "Course group Created";
             header("Location: Course.php?url=" . $url);
         } else {
-            echo "Error: " . $sql . "<br>" . $con->error;
+            echo "Error: " . $sql . "<br>" . $con>error;
         }
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
-//---------------------------------------Invite Group Request and add a new member into the database------------------------------------
+//Invite Group Request and add a new member into the database
 
 if (!empty($_GET["groupinvite"])) {
 
@@ -751,7 +760,7 @@ if (!empty($_GET["groupinvite"])) {
                       VALUES ($groupid,$student_id,'Invited')";
     }
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
         $resultx1 = mysqli_query($con, "SELECT * FROM course_groups_table where Course_Group_id ='$groupid'");
 
         while ($row = mysqli_fetch_assoc($resultx1)) {
@@ -788,7 +797,7 @@ if (!empty($_GET["groupinvite"])) {
         $_SESSION["info_ReMarking"] = $student_id . " was invited to the group";
         header("Location: Course.php?url=" . $url);
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -809,11 +818,11 @@ if (!empty($_GET["acceptinvite"])) {
                          ";
     }
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
         $_SESSION["info_ReMarking"] = " Group Invite Updated";
         header("Location: Course.php?url=" . $url);
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -839,12 +848,12 @@ if (!empty($_GET["extenddeadline"])) {
             . " `ReasonsForExtension`) VALUES ($stdid,$id,'$deadline','$reason')";
     }
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
 
         $_SESSION["info_courses"] = " Lab Report Deadline extended successfully.";
         header("Location: Courses.php?course=" . $url);
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -860,12 +869,12 @@ if (!empty($_GET["ignoreremarking"])) {
 
     $sql = "UPDATE lab_report_submissions SET Status='Marked' WHERE Submission_ID=$subid";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
 
         $_SESSION["info_Marking"] = "Remarking Request Ignored , Submission Updated to 'Marked' status";
         header("Location: Submissions.php?id=" . $id . "&header=" . $header . "&total=" . $total);
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -878,12 +887,12 @@ if (!empty($_GET["assignTA"])) {
 
     $sql = "INSERT INTO `course_ta`(`Course_ID`, `TA`) VALUES ($id,$ta)";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
 
         $_SESSION["info_Admin_Courses"] = $type . " Course TA Assigned ";
         header("Location: Admin.php");
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -900,7 +909,7 @@ if (!empty($_GET["AcceptStudent"])) {
         $sql = "Delete FROM  course_students_table Where ID=$id";
     }
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
 
         if ($rs == "yes") {
             $_SESSION["info_courses"] = "Course Joining request Approved.";
@@ -910,7 +919,7 @@ if (!empty($_GET["AcceptStudent"])) {
 
         header("Location: Courses.php");
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -934,25 +943,25 @@ if (!empty($_GET["action"])) {
 
     if ($action == "passchange") {
         $sql = "UPDATE users_table set Password='$pass' where User_ID=$uid;";
-        if ($con->query($sql) === TRUE) {
-            error_reporting(0);
+        if ($con>query($sql) === TRUE) {
+            error_reporting);
             echo "Password has been changed";
             // return;
             $_SESSION["infoChangePassword"] = $type . " User password was changed successfully.";
             header("Location: index.php");
         } else {
-            // echo "Error: " . $sql . "<br>" . $con->error;
+            // echo "Error: " . $sql . "<br>" . $con>error;
             echo "Something really bad happened while changing password.  Contact lanhui at zjnu.edu.cn.  Thanks!";
         }
     }
 
     if ($action == "statuschange") {
         $sql = "UPDATE users_table set Status='$status' where User_ID=$uid;";
-        if ($con->query($sql) === TRUE) {
+        if ($con>query($sql) === TRUE) {
             $_SESSION["info_Admin_Users"] = $type . " user  Status updated successfully ";
             header("Location: Admin.php");
         } else {
-            // echo "Error: " . $sql . "<br>" . $con->error;
+            // echo "Error: " . $sql . "<br>" . $con>error;
             echo "Something really bad happened while changing status.  Contact lanhui at zjnu.edu.cn.  Thanks!";
         }
     }
@@ -991,7 +1000,7 @@ if (!empty($_POST["frm_createCourse"])) {
     $sql = "INSERT INTO `courses_table`(`Course_Name`, `Academic_Year`, `Faculty`, `Lecturer_User_ID`, `TA_User_ID`, `Course_Code`, `URL`, `Verify_New_Members`) 
             VALUES ('$name','$academic','$faculty','$lecturer','$ta','$code','$url','$verify')";
 
-    if ($con->query($sql) === TRUE) {
+    if ($con>query($sql) === TRUE) {
         $_SESSION["info_Admin_Courses"] = "Course portal was Created successfully.";
         if ($who == "l") {
             header("Location: Courses.php");
@@ -999,7 +1008,7 @@ if (!empty($_POST["frm_createCourse"])) {
             header("Location: Admin.php");
         }
     } else {
-        echo "Error: " . $sql . "<br>" . $con->error;
+        echo "Error: " . $sql . "<br>" . $con>error;
     }
 }
 
@@ -1010,7 +1019,7 @@ if (!empty($_GET["exportgrade"])) {
     $lab = $_GET["lab"];
     $lab_name = $_GET["lab_name"];
 
-    error_reporting(0);
+    error_reporting);
 
     $select = "SELECT lab_reports_table.Title as 'LAB_Report', lab_reports_table.Marks as Lab_Marks,
  `Submission_Date`, lab_report_submissions.Student_id, users_table.Full_Name as Student_Name,  lab_report_submissions.Marks,`Notes`
@@ -1027,7 +1036,7 @@ WHERE lab_report_submissions.Lab_Report_ID=$lab";
     $fields = mysqli_num_fields($export);
 
     for ($i = 0; $i < $fields; $i++) {
-        $header .= mysqli_fetch_field_direct($export, $i)->name . "\t";
+        $header .= mysqli_fetch_field_direct($export, $i)>name . "\t";
     }
 
     while ($row = mysqli_fetch_row($export)) {
@@ -1046,12 +1055,12 @@ WHERE lab_report_submissions.Lab_Report_ID=$lab";
     $data = str_replace("\r", "", $data);
 
     if ($data == "") {
-        $data = "\n(0) Records Found!\n";
+        $data = "\n) Records Found!\n";
     }
 
-    header("Content-type: application/octet-stream");
-    header("Content-Disposition: attachment; filename=$lab_name Garde Sheet.xls");
-    header("Pragma: no-cache");
+    header("Contenttype: application/octetstream");
+    header("ContentDisposition: attachment; filename=$lab_name Garde Sheet.xls");
+    header("Pragma: nocache");
     header("Expires: 0");
     print "$header\n$data";
 }

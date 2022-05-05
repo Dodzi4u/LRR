@@ -14,37 +14,37 @@ if (isset($_SESSION["user_fullname"])) {
 <br><br><br>
 
 <div class="row" style="width:85%;margin:auto;">
-  <div class="col-md-4">
+  <div class="colmd4">
     <br><br>
-    <img src="logo.png" style="width:40%; position:relative; right:-95px; top:1px;">
+    <img src="logo.png" style="width:40%; position:relative; right:95px; top:1px;">
     <br><br>
-    <div style="width:20%; position:relative; right:-90px; font-family: Poppins-Regular;">
+    <div style="width:20%; position:relative; right:90px; fontfamily: PoppinsRegular;">
     <h1>Lab Report Repository</h1>
     <br><br>
     </div>
     </div>
     <br>
-    <div style = "position:relative; left:240px; top:-2px;">
-    <h4 class="list-group-item active" style="font-weight:normal;font-family: Poppins-Regular;"> Sign in </h4>
-    <div class="list-group-item">
+    <div style = "position:relative; left:240px; top:2px;">
+    <h4 class="listgroupitem active" style="fontweight:normal;fontfamily: PoppinsRegular;"> Sign in </h4>
+    <div class="listgroupitem">
 
-    <div class="panel-body">
+    <div class="panelbody">
 
     <form method="post" action="Script.php" name="frm_login">
     <input type="hidden" name="frm_login" value="true"/>
     Student ID / Instructor Email
-    <input type="text" name="user" placeholder="Email / Student Number" class="form-control" required="required" id="user_name" />
+    <input type="text" name="user" placeholder="Email / Student Number" class="formcontrol" required="required" id="user_name" />
     <br>
     Password
-    <input type="password" class="form-control"  name="password" placeholder="password" required="required" id="user_password" />
-    <div class="text-center">
-    <br><input type="submit" class="btn-primary" value="Login" id="login_btn">
+    <input type="password" class="formcontrol"  name="password" placeholder="password" required="required" id="user_password" />
+    <div class="textcenter">
+    <br><input type="submit" class="btnprimary" value="Login" id="login_btn">
     </div>
-    <br> <a href="recover_password.php" style="font-weight:normal;color:#2471A3; font-family: Poppins-Regular;
-    font-size: 17px;">Reset my password</a>
-    <div class="text-center">
+    <br> <a href="recover_password.php" style="fontweight:normal;color:#2471A3; fontfamily: PoppinsRegular;
+    fontsize: 17px;">Reset my password</a>
+    <div class="textcenter">
     <br><span class="txt1">Don't have an account?</span>
-         <a class="txt2" href="signup.php" style="font-weight:normal" id="signup_link">Sign Up</a>
+         <a class="txt2" href="signup.php" style="fontweight:normal" id="signup_link">Sign Up</a>
         </a>
     </div>
 
@@ -53,20 +53,20 @@ if (isset($_SESSION["user_fullname"])) {
     error_reporting(E_ALL);
     
     if(isset($_SESSION['info_login'])) {
-        echo  '<hr><div class="alert alert-danger" role="alert">'.$_SESSION['info_login'].'</div>';
+        echo  '<hr><div class="alert alertdanger" role="alert">'.$_SESSION['info_login'].'</div>';
         $_SESSION['info_login']=null;
     }
     
     
     // wrong pass
     if(isset($_SESSION['wrong_pass'])) {
-        echo  '<hr><div class="alert alert-danger" role="alert">'.$_SESSION['wrong_pass'].'</div>';
+        echo  '<hr><div class="alert alertdanger" role="alert">'.$_SESSION['wrong_pass'].'</div>';
         $_SESSION['wrong_pass']=null;
     }
     
     
     if(isset($_SESSION['infoChangePassword'])) {
-        echo  '<hr><div class="alert alert-danger" role="alert">'.$_SESSION['infoChangePassword'].'</div>';
+        echo  '<hr><div class="alert alertdanger" role="alert">'.$_SESSION['infoChangePassword'].'</div>';
         $_SESSION['infoChangePassword']=null;
     }
     ?>
@@ -88,38 +88,38 @@ if (isset($_SESSION["user_fullname"])) {
 </body>
 
 <style>
-    /*------------------------------------------------------------------
+    /*
 [ Login Button ]*/
-.btn-primary {
+.btnprimary {
             color: white;
-            border-radius: 5px;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+            borderradius: 5px;
+            textshadow: 0 1px 1px rgba, 0, 0, 0.2);
             background: rgb(75, 184, 240);
             padding:5px 100px;
-            font-family: Poppins-Regular;
-            font-size: 23px;
-            line-height: 1.5;
+            fontfamily: PoppinsRegular;
+            fontsize: 23px;
+            lineheight: 1.5;
         }
 
 #footer{
 position:fixed;
 bottom:0;
 left:0;
-background-color:#03417C;
+backgroundcolor:#03417C;
 color:#FFF;
-text-align:center;
+textalign:center;
 width:100%;
 }
 .txt1 {
-  font-family: Poppins-Regular;
-  font-size: 18px;
-  line-height: 1.5;
+  fontfamily: PoppinsRegular;
+  fontsize: 18px;
+  lineheight: 1.5;
   color: #666666;
 }
 .txt2 {
-  font-family: Poppins-Regular;
-  font-size: 19px;
-  line-height: 1.5;
+  fontfamily: PoppinsRegular;
+  fontsize: 19px;
+  lineheight: 1.5;
   color: #2471A3;
 }
 

@@ -12,13 +12,13 @@ $user_d = $_SESSION['user_id'];
 if ($_SESSION['user_type'] == "Lecturer" || $_SESSION['user_type'] == "TA") {
 ?>
 
-    <!--    FOR LECTURER-->
+    <!    FOR LECTURER>
 
-    <div class="row" style="width:80%;margin:auto; text-align:left;">
+    <div class="row" style="width:80%;margin:auto; textalign:left;">
 
-        <script src="./css/jquery-1.11.1.min.js"></script>
-        <script src="./css/jquery-ui.min.js"></script>
-        <link rel="stylesheet" href="./css/jquery-ui.css" />
+        <script src="./css/jquery1.11.1.min.js"></script>
+        <script src="./css/jqueryui.min.js"></script>
+        <link rel="stylesheet" href="./css/jqueryui.css" />
 
         <script>
             function extend_deadline(id) {
@@ -80,16 +80,16 @@ New Date/Time <br><input type="date" name="date" required="" id="new_date"> <inp
                     echo    "  
                   
                         <div class='alert> <a href='~\..\Courses.php?course=$url'>   <div class='panel'>
-  ($code) - $name 
-   <br> <span style='font-size:8pt'>Faculty: $faculty | Year: $academic | Lecturer: $lecturer </span>
+  ($code)  $name 
+   <br> <span style='fontsize:8pt'>Faculty: $faculty | Year: $academic | Lecturer: $lecturer </span>
 </div></a>
-                        <hr></div></div> <div class='row' style='width:80%;margin:auto; text-align:left;'>
+                        <hr></div></div> <div class='row' style='width:80%;margin:auto; textalign:left;'>
  ";
 
-                    echo "<div class='col-md-5'>";
+                    echo "<div class='colmd5'>";
                 }
 
-                // ------------------------------Editing Lab Assignment by Lecturer ------------------------------------
+                // Editing Lab Assignment by Lecturer 
 
                 if ($_GET['act'] == "edit") {
                     $getid = $_GET["cid"];
@@ -113,13 +113,13 @@ New Date/Time <br><input type="date" name="date" required="" id="new_date"> <inp
                         $marks = $_POST["marks"];
                         $type  = $_POST["type"];
                         $Deadline = $deadlinedate . " " . $deadlinetime;
-                        $date =  date("Y-m-d H:i");
+                        $date =  date("Ymd H:i");
 
                         $sql = "UPDATE `lab_reports_table` SET `Deadline` = ('" . $Deadline . "'), `Instructions` = ('" . $instructions . "'), `Title` = ('" . $title . "'), `Marks` = ('" . $marks . "'), `Type` = ('" . $type . "') WHERE `lab_reports_table`.`Lab_Report_ID` = '$getid'";
-                        if ($con->query($sql) === TRUE) {
+                        if ($con>query($sql) === TRUE) {
                             $_SESSION["info_Updated"] = "Assignment information updated successfully.";
                         } else {
-                            // echo "Error: " . $sql . "<br>" . $con->error;
+                            // echo "Error: " . $sql . "<br>" . $con>error;
                             echo "Serious error happened whiling updating assignment information.";
                         }
                     }
@@ -134,34 +134,34 @@ New Date/Time <br><input type="date" name="date" required="" id="new_date"> <inp
 
                         echo "  <h3><a href='Courses.php?course=" . $url . "'> Editing Lab Assignment </a></h3>";
         ?>
-                        <form method='post' enctype='multipart/form-data' action=''>
+                        <form method='post' enctype='multipart/formdata' action=''>
                             <input type='hidden' name='frm_uploadlab' value='true' required='' />
                             <input type='hidden' name='course_id' value='<?php echo "$id" ?>' required='' />
                             <input type='hidden' name='url' value='<?php echo ".$course_url." ?>' required='' />
 
                             Dealine Date/Time
                             <div class='row'>
-                                <div class='col-md-7'><input type='date' id='date' name='deadlinedate' placeholder='' class='form-control' required='' value="<?php echo isset($_GET['act']) && $_GET['act'] == "edit" ? $Date : ""; ?>"> </div>
-                                <div class='col-md-5'> <input type='text' id='time' class='form-control' name='deadlinetime' value="<?php echo isset($_GET['act']) && $_GET['act'] == "edit" ? $Time : ""; ?>"> </div>
+                                <div class='colmd7'><input type='date' id='date' name='deadlinedate' placeholder='' class='formcontrol' required='' value="<?php echo isset($_GET['act']) && $_GET['act'] == "edit" ? $Date : ""; ?>"> </div>
+                                <div class='colmd5'> <input type='text' id='time' class='formcontrol' name='deadlinetime' value="<?php echo isset($_GET['act']) && $_GET['act'] == "edit" ? $Time : ""; ?>"> </div>
                             </div>
 
                             Title
-                            <input type='text' name='title' placeholder='Ttle' class='form-control' required='' value="<?php echo isset($_GET['act']) && $_GET['act'] == "edit" ? $Title : ""; ?>">
+                            <input type='text' name='title' placeholder='Ttle' class='formcontrol' required='' value="<?php echo isset($_GET['act']) && $_GET['act'] == "edit" ? $Title : ""; ?>">
                             Instructions
-                            <textarea name='instructions' placeholder='Assignment Instructions' class='form-control' required=''><?php echo isset($_GET['act']) && $_GET['act'] == 'edit' ? $Instructions : ''; ?></textarea>
+                            <textarea name='instructions' placeholder='Assignment Instructions' class='formcontrol' required=''><?php echo isset($_GET['act']) && $_GET['act'] == 'edit' ? $Instructions : ''; ?></textarea>
                             Marks
-                            <input type='text' name='marks' placeholder='Marks' class='form-control' required='' value="<?php echo isset($_GET['act']) && $_GET['act'] == "edit" ? $Marks : ""; ?>">
+                            <input type='text' name='marks' placeholder='Marks' class='formcontrol' required='' value="<?php echo isset($_GET['act']) && $_GET['act'] == "edit" ? $Marks : ""; ?>">
                             Attachment 1
-                            <input type='file' name='attachment1' placeholder='Attachment 1' class='form-control'>
+                            <input type='file' name='attachment1' placeholder='Attachment 1' class='formcontrol'>
 
                             Attachment 2
-                            <input type='file' name='attachment2' placeholder='Attachment 1' class='form-control'>
+                            <input type='file' name='attachment2' placeholder='Attachment 1' class='formcontrol'>
 
                             Attachment 3
-                            <input type='file' name='attachment3' placeholder='Attachment 1' class='form-control'>
+                            <input type='file' name='attachment3' placeholder='Attachment 1' class='formcontrol'>
 
                             Attachment 4
-                            <input type='file' name='attachment4' placeholder='Attachment 4' class='form-control'>
+                            <input type='file' name='attachment4' placeholder='Attachment 4' class='formcontrol'>
                             <br>
 
                             <?php
@@ -173,16 +173,16 @@ New Date/Time <br><input type="date" name="date" required="" id="new_date"> <inp
                             ?>
 
                             <hr>
-                            <input type='submit' class='btn btn-primary' value='Post Lab Assignment'><br>
+                            <input type='submit' class='btn btnprimary' value='Post Lab Assignment'><br>
                         </form><br><br><br><br>
                     <?php
                     }
                 } else {
 
-                    // ------------------------------Posting New Lab Assignment------------------------------------
+                    // Posting New Lab Assignment
 
                     // Mysql to split 1 string into 2 similar to the tsrstr in php
-                    // SELECT SUBSTRING_INDEX(Deadline, ' ', 1) as Date, SUBSTRING_INDEX(Deadline, ' ', -1) as Time from lab_reports_table
+                    // SELECT SUBSTRING_INDEX(Deadline, ' ', 1) as Date, SUBSTRING_INDEX(Deadline, ' ', 1) as Time from lab_reports_table
 
                     if ($_SESSION['user_type'] == "Lecturer") {
 
@@ -190,7 +190,7 @@ New Date/Time <br><input type="date" name="date" required="" id="new_date"> <inp
 
                         <h3> Post new Lab Assignment </a></h3>
 
-                        <form method='post' enctype='multipart/form-data' action='Script.php' id="newlab_form">
+                        <form method='post' enctype='multipart/formdata' action='Script.php' id="newlab_form">
                             <?php
                             $_SESSION['url'] = $url;
                             ?>
@@ -200,33 +200,33 @@ New Date/Time <br><input type="date" name="date" required="" id="new_date"> <inp
 
                             Dealine Date/Time
                             <div class='row'>
-                                <div class='col-md-7'><input type='date' id='date' name='deadlinedate' placeholder='' class='form-control' required='' value=""> </div>
-                                <div class='col-md-5'> <input type='time' class='form-control' name='deadlinetime' value=""> </div>
+                                <div class='colmd7'><input type='date' id='date' name='deadlinedate' placeholder='' class='formcontrol' required='' value=""> </div>
+                                <div class='colmd5'> <input type='time' class='formcontrol' name='deadlinetime' value=""> </div>
                             </div>
 
                             Title
-                            <input type='text' name='title' placeholder='Ttle' class='form-control' required='' value="" id="lab_title">
+                            <input type='text' name='title' placeholder='Ttle' class='formcontrol' required='' value="" id="lab_title">
                             Instructions
-                            <textarea name='instructions' placeholder='Assignment Instructions' class='form-control' required='' value="" id="lab_instructor"></textarea>
+                            <textarea name='instructions' placeholder='Assignment Instructions' class='formcontrol' required='' value="" id="lab_instructor"></textarea>
                             Marks
-                            <input type='text' name='marks' placeholder='Marks' class='form-control' required='' value="" id="lab_mark">
+                            <input type='text' name='marks' placeholder='Marks' class='formcontrol' required='' value="" id="lab_mark">
                             Attachment 1
-                            <input type='file' name='attachment1' placeholder='Attachment 1' class='form-control'>
+                            <input type='file' name='attachment1' placeholder='Attachment 1' class='formcontrol'>
 
                             Attachment 2
-                            <input type='file' name='attachment2' placeholder='Attachment 1' class='form-control'>
+                            <input type='file' name='attachment2' placeholder='Attachment 1' class='formcontrol'>
 
                             Attachment 3
-                            <input type='file' name='attachment3' placeholder='Attachment 1' class='form-control'>
+                            <input type='file' name='attachment3' placeholder='Attachment 1' class='formcontrol'>
 
                             Attachment 4
-                            <input type='file' name='attachment4' placeholder='Attachment 4' class='form-control'>
+                            <input type='file' name='attachment4' placeholder='Attachment 4' class='formcontrol'>
                             <br>
                             Submission Type <input type='radio' name='type' value='Individual' required='' id="lab_individual"> Individual
 
                             <input type='radio' name='type' value='Group' required='' id="lab_group"> Group
                             <hr>
-                            <input type='submit' class='btn btn-primary' value='Post Lab Assignment' id="submit_btn"><br>
+                            <input type='submit' class='btn btnprimary' value='Post Lab Assignment' id="submit_btn"><br>
                         </form><br><br><br><br>
         <?php
                     }
@@ -234,19 +234,19 @@ New Date/Time <br><input type="date" name="date" required="" id="new_date"> <inp
             }
             echo "</div>";
 
-            echo "<div class='col-md-7'>  <h3> Lab Report Assignment list </h3>";
+            echo "<div class='colmd7'>  <h3> Lab Report Assignment list </h3>";
 
-            error_reporting(0);
+            error_reporting);
             if (isset($_SESSION["info_Updated"])) {
-                echo '<hr><div class="alert alert-info" role="alert">' . $_SESSION['info_Updated'] . '</div>';
+                echo '<hr><div class="alert alertinfo" role="alert">' . $_SESSION['info_Updated'] . '</div>';
                 $_SESSION['info_Updated'] = null;
             }
             if (isset($_SESSION['info_courses'])) {
-                echo '<hr><div class="alert alert-info" role="alert">' . $_SESSION['info_courses'] . '</div>';
+                echo '<hr><div class="alert alertinfo" role="alert">' . $_SESSION['info_courses'] . '</div>';
                 $_SESSION['info_courses'] = null;
             }
             if (isset($_SESSION['info_courses'])) {
-                echo '<hr><div class="alert alert-info" role="alert">' . $_SESSION['info_courses'] . '</div>';
+                echo '<hr><div class="alert alertinfo" role="alert">' . $_SESSION['info_courses'] . '</div>';
                 $_SESSION['info_courses'] = null;
             }
 
@@ -303,13 +303,13 @@ New Date/Time <br><input type="date" name="date" required="" id="new_date"> <inp
 
                     $header = "Courses > " . $name . "($code) > Assignments > " . $title;
 
-                    echo "      <div class='break-word btn btn-default' style='word-wrap: break-word;border-color:grey;'>
+                    echo "      <div class='breakword btn btndefault' style='wordwrap: breakword;bordercolor:grey;'>
   $title ($as_type) <br> $ins
   
-   <br> <span style='font-size:8pt'>Posted : $posted  Deadline :  <b> $deadline </b> &nbsp; ($marks Marks)      &nbsp;    &nbsp; &nbsp; &nbsp; &nbsp;   "
+   <br> <span style='fontsize:8pt'>Posted : $posted  Deadline :  <b> $deadline </b> &nbsp; ($marks Marks)      &nbsp;    &nbsp; &nbsp; &nbsp; &nbsp;   "
                         . "<br>"
 
-                        . "<span class='btn-default'> &nbsp;&nbsp; $count_subs Submissions ( $count_marked Marked ) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='Courses.php?course=" . $url . "&act=edit&cid=" . $id . "'>Edit</a>&nbsp;&nbsp; |&nbsp;&nbsp;<a href='~\..\Submissions.php?id=$id&header=$header&total=$marks' onclick='' id='view_submissions_link_$counter'> View </a>     &nbsp;&nbsp; |&nbsp;&nbsp;         <a href='#'  onclick='extend_deadline($id)' id='extend_deadline_link'> Extend Deadline </a>  </span>         <hr> Attachments : $full_link </span>"
+                        . "<span class='btndefault'> &nbsp;&nbsp; $count_subs Submissions ( $count_marked Marked ) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='Courses.php?course=" . $url . "&act=edit&cid=" . $id . "'>Edit</a>&nbsp;&nbsp; |&nbsp;&nbsp;<a href='~\..\Submissions.php?id=$id&header=$header&total=$marks' onclick='' id='view_submissions_link_$counter'> View </a>     &nbsp;&nbsp; |&nbsp;&nbsp;         <a href='#'  onclick='extend_deadline($id)' id='extend_deadline_link'> Extend Deadline </a>  </span>         <hr> Attachments : $full_link </span>"
                         . "&nbsp;&nbsp;</div>
                         ";
                 }
@@ -337,14 +337,14 @@ WHERE Course_ID=$course_id");
 
         ?>
 
-        <div class="col-md-8">
+        <div class="colmd8">
 
             <?php
             $user_name = $_SESSION['user_fullname'];
 
-            echo    "  <div class='alert' style='margin-left:20px;border-bottom:2px solid #1D91EF;'> <a href='~\..\Courses.php?course=$url'>
+            echo    "  <div class='alert' style='marginleft:20px;borderbottom:2px solid #1D91EF;'> <a href='~\..\Courses.php?course=$url'>
   Course Portal  > $user_name (Lecturer) > Course Listing
-   <br> <span style='font-size:8pt'> </span>
+   <br> <span style='fontsize:8pt'> </span>
 </a></div>
  ";
 
@@ -376,20 +376,20 @@ where course_ta.Course_ID=$id");
 
                     $ta = "";
                     while ($rowTA = mysqli_fetch_assoc($resultTA)) {
-                        $ta = $ta . "  - " . $rowTA['TA_NAME'];
+                        $ta = $ta . "   " . $rowTA['TA_NAME'];
                     }
 
                     echo "  
                   
-                         <a href='~\..\Courses.php?course=$url'>   <div class='btn btn-default'>
-  ($code) - $name 
-   <br> <span style='font-size:8pt'>Faculty : $faculty &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Year :  $academic  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Lecturer  :$lecturer  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  TA:$ta </span>
+                         <a href='~\..\Courses.php?course=$url'>   <div class='btn btndefault'>
+  ($code)  $name 
+   <br> <span style='fontsize:8pt'>Faculty : $faculty &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Year :  $academic  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Lecturer  :$lecturer  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  TA:$ta </span>
 </div></a>
                         ";
                 }
             } ?>
         </div>
-        <div class="col-md-4">
+        <div class="colmd4">
             <br>
             <b> Course Joining Requests </b>
 
@@ -402,7 +402,7 @@ WHERE  Lecturer_User_ID=$lecturer_id and course_students_table.Status='Pending'"
 
             if (mysqli_num_rows($result) == 0) {
 
-                echo "<br>  <i class='fa fa-info-circle'></i> No Course joining request so far for all your courses <hr>";
+                echo "<br>  <i class='fa fainfocircle'></i> No Course joining request so far for all your courses <hr>";
             } else {
                 while ($row = mysqli_fetch_assoc($result)) {
                     $id = $row['ID'];
@@ -413,9 +413,9 @@ WHERE  Lecturer_User_ID=$lecturer_id and course_students_table.Status='Pending'"
                     $std_name = $row['Full_Name'];
                     $academic = $row['Academic_Year'];
 
-                    echo "<div class='btn btn-default'>
- $std_name is Requesting to join <br> [($code) - $name ] &nbsp;&nbsp;&nbsp;&nbsp; <br><a href='~\..\Script.php?AcceptStudent=y&id=$id&rs=yes' class='btn-sm btn-success' onclick=return confirm(\"are you sure to join this course?\")' > Accept </a>
- &nbsp;&nbsp;<a href='~\..\Script.php?AcceptStudent=y&id=$id&rs=no' class='btn-sm btn-danger' onclick=return confirm(\"are you sure to join this course?\")' > Decline </a>                     
+                    echo "<div class='btn btndefault'>
+ $std_name is Requesting to join <br> [($code)  $name ] &nbsp;&nbsp;&nbsp;&nbsp; <br><a href='~\..\Script.php?AcceptStudent=y&id=$id&rs=yes' class='btnsm btnsuccess' onclick=return confirm(\"are you sure to join this course?\")' > Accept </a>
+ &nbsp;&nbsp;<a href='~\..\Script.php?AcceptStudent=y&id=$id&rs=no' class='btnsm btndanger' onclick=return confirm(\"are you sure to join this course?\")' > Decline </a>                     
 </div>";
                 }
             }
@@ -433,19 +433,19 @@ WHERE  Lecturer_User_ID=$lecturer_id and course_students_table.Status='Pending'"
                     <input type="hidden" name="frm_createCourse" value="true" required="" />
                     <input type="hidden" name="l" value="l" required="" />
                     Course Name
-                    <input type="text" name="name" placeholder="Course Name" class="form-control" required="" id="course_name">
+                    <input type="text" name="name" placeholder="Course Name" class="formcontrol" required="" id="course_name">
 
                     Course Code
-                    <input type="text" name="code" placeholder="Course Code" class="form-control" required="" id="course_code">
+                    <input type="text" name="code" placeholder="Course Code" class="formcontrol" required="" id="course_code">
 
                     URL (Leave blank to use Course Code & Year)
-                    <input type="text" name="url" placeholder="Choose Custom URL " class="form-control">
+                    <input type="text" name="url" placeholder="Choose Custom URL " class="formcontrol">
 
                     Academic Year
-                    <input type="text" name="academic" placeholder="Academic Year" class="form-control" required="" id="academic_year">
+                    <input type="text" name="academic" placeholder="Academic Year" class="formcontrol" required="" id="academic_year">
 
                     Faculty <br>
-                    <input type="text" name="faculty" placeholder="Faculty" class="form-control" required="" id="faculty">
+                    <input type="text" name="faculty" placeholder="Faculty" class="formcontrol" required="" id="faculty">
 
                     <input type="hidden" name="lecturer" value="<?php echo $_SESSION['user_id'];  ?>">
 
@@ -454,7 +454,7 @@ WHERE  Lecturer_User_ID=$lecturer_id and course_students_table.Status='Pending'"
                     <input type="radio" name="verify" value="0" checked="" id="join_no"> No
 
                     <br>
-                    <input type="submit" class="btn btn-primary" value="Create Portal" id="portal_btn"><br>
+                    <input type="submit" class="btn btnprimary" value="Create Portal" id="portal_btn"><br>
 
                 </form>
 
@@ -462,7 +462,7 @@ WHERE  Lecturer_User_ID=$lecturer_id and course_students_table.Status='Pending'"
 
         </div>
 
-        <!--   END LECTURER   -->
+        <!   END LECTURER   >
 
     <?php
 }
@@ -470,28 +470,28 @@ WHERE  Lecturer_User_ID=$lecturer_id and course_students_table.Status='Pending'"
 if ($_SESSION['user_type'] == "Student") {
     ?>
 
-        <!--STUDENT CODE-->
-        <div class="row" style="width:80%;margin:auto; text-align:left;">
-            <div class="col-md-6">
+        <!STUDENT CODE>
+        <div class="row" style="width:80%;margin:auto; textalign:left;">
+            <div class="colmd6">
                 <br> Course Portal > Students <br>
                 <?php
 
-                error_reporting(0);
+                error_reporting);
                 if (isset($_SESSION['info_Courses_student'])) {
-                    echo '<hr><span class="alert alert-success" role="alert">' . $_SESSION['info_Courses_student'] . '</span>';
+                    echo '<hr><span class="alert alertsuccess" role="alert">' . $_SESSION['info_Courses_student'] . '</span>';
                     $_SESSION['info_Courses_student'] = null;
                 }
                 ?>
                 <br><br>
             </div>
-            <div class="col-md-6"></div>
+            <div class="colmd6"></div>
         </div>
 
-        <div class="row" style="width:80%;margin:auto; text-align:left;">
-            <div class="col-md-6">
+        <div class="row" style="width:80%;margin:auto; textalign:left;">
+            <div class="colmd6">
 
             <?php
-            error_reporting(0);
+            error_reporting);
             $student_id = $_SESSION['user_student_id'];
             if (!empty($_GET["search"]) || !empty($_GET["faculty"])) {
                 $search = trim($_GET["search"]);
@@ -526,13 +526,13 @@ if ($_SESSION['user_type'] == "Student") {
                         $v = $row['Verify_New_Members'];
                         $msg2 = "Join Course";
                         if ($v > 0) {
-                            $msg = "<i class='fa fa-exclamation-circle'></i> Lecturer verification required";
+                            $msg = "<i class='fa faexclamationcircle'></i> Lecturer verification required";
                             $msg2 = "Send Joining Request";
                         }
 
-                        echo "<div class='btn btn-default' style='word-wrap:break-word'>
-  [$code] $name <br>($url) <br>  <a href='~\..\Script.php?JoinCourse=y&id=$id&std=$student_id&joining=$v' class='btn-sm btn-success' onclick=return confirm(\"Are you sure to join this course?\")' id='join_btn'> $msg2 </a>
-   <br> <span style='font-size:10pt'>Faculty: $faculty | Year: $academic | Lecturer: $lecturer </span><br>$msg</div>
+                        echo "<div class='btn btndefault' style='wordwrap:breakword'>
+  [$code] $name <br>($url) <br>  <a href='~\..\Script.php?JoinCourse=y&id=$id&std=$student_id&joining=$v' class='btnsm btnsuccess' onclick=return confirm(\"Are you sure to join this course?\")' id='join_btn'> $msg2 </a>
+   <br> <span style='fontsize:10pt'>Faculty: $faculty | Year: $academic | Lecturer: $lecturer </span><br>$msg</div>
                         ";
                     }
                 }
@@ -548,7 +548,7 @@ INNER JOIN course_students_table on course_students_table.Course_ID=courses_tabl
                   where course_students_table.Student_ID=$student_id");
 
             if (mysqli_num_rows($result) == 0) {
-                echo "<i class='fa fa-exclamation-circle'></i> You are not Enrolled in any Course";
+                echo "<i class='fa faexclamationcircle'></i> You are not Enrolled in any Course";
             } else {
                 while ($row = mysqli_fetch_assoc($result)) {
                     $name = $row['Course_Name'];
@@ -561,30 +561,30 @@ INNER JOIN course_students_table on course_students_table.Course_ID=courses_tabl
                     $Status = $row['Status'];
 
                     if ($Status == "Joined") {
-                        echo "<a href='~\..\Course.php?url=$url'>   <div class='btn btn-default' style='word-wrap:break-word'>
-  ($code) - $name <br>($url)       &nbsp;&nbsp;&nbsp; <i class='fa fa-check-circle'></i> $Status   &nbsp;&nbsp;&nbsp;&nbsp; <a href='~\..\Course.php?url=$url' class='btn-sm btn-primary'> Open</a>
-   <br> <span style='font-size:8pt'>Faculty : $faculty  Year :   $academic  Lecturer  :$lecturer </span></div></a>
+                        echo "<a href='~\..\Course.php?url=$url'>   <div class='btn btndefault' style='wordwrap:breakword'>
+  ($code)  $name <br>($url)       &nbsp;&nbsp;&nbsp; <i class='fa facheckcircle'></i> $Status   &nbsp;&nbsp;&nbsp;&nbsp; <a href='~\..\Course.php?url=$url' class='btnsm btnprimary'> Open</a>
+   <br> <span style='fontsize:8pt'>Faculty : $faculty  Year :   $academic  Lecturer  :$lecturer </span></div></a>
                         ";
                     } else {
-                        echo "<div class='btn btn-default'>
-  ($code) - $name  <i class='btn-sm btn-danger'> $Status</i>
-   <br> <span style='font-size:8pt'>Faculty : $faculty  Year :   $academic  Lecturer  :$lecturer </span></div>
+                        echo "<div class='btn btndefault'>
+  ($code)  $name  <i class='btnsm btndanger'> $Status</i>
+   <br> <span style='fontsize:8pt'>Faculty : $faculty  Year :   $academic  Lecturer  :$lecturer </span></div>
                         ";
                     }
                 }
             }
 
-            echo "</div><div class='col-md-6'>
+            echo "</div><div class='colmd6'>
     
         <form method='get' action='Courses.php'>
             <div class='row'> 
-            <div class='col-md-10'> 
-            <div class='row'><div class='col-md-6'> Find course by Code
-            <input  type='text' class='form-control' name='search' placeholder='Enter Course Code' id='search_field'>
-            </div><div class='col-md-6'>
+            <div class='colmd10'> 
+            <div class='row'><div class='colmd6'> Find course by Code
+            <input  type='text' class='formcontrol' name='search' placeholder='Enter Course Code' id='search_field'>
+            </div><div class='colmd6'>
 List courses by faculty
 
-<select name='faculty' class='form-control'>";
+<select name='faculty' class='formcontrol'>";
             $result = mysqli_query($con, "SELECT   DISTINCT(Faculty) as Faculty FROM `courses_table`");
             if (mysqli_num_rows($result) == 0) {
             } else {
@@ -598,8 +598,8 @@ List courses by faculty
             echo "</select></div></div>
 
 </div>
-                 <div class='col-md-1'> <br>
-            <input type='submit' class='btn btn-primary' value='Find' id='find_btn'>
+                 <div class='colmd1'> <br>
+            <input type='submit' class='btn btnprimary' value='Find' id='find_btn'>
             </div>
        
         </div>
@@ -611,8 +611,8 @@ List courses by faculty
             ?>
 
             <style>
-                .form-control {
-                    padding-top: 1px;
-                    padding-bottom: 1px;
+                .formcontrol {
+                    paddingtop: 1px;
+                    paddingbottom: 1px;
                 }
             </style>

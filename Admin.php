@@ -16,8 +16,8 @@ if ($_SESSION['user_type'] != "Lecturer") {
 ?>
 
 <style>
-  .col-md-4 {
-    border-right: 1px solid skyblue;
+  .colmd4 {
+    borderright: 1px solid skyblue;
   }
 </style>
 
@@ -29,13 +29,13 @@ if ($_SESSION['user_type'] != "Lecturer") {
 <hr>
 <div class="row" style="width: 80%;margin: auto;">
 
-  <!--<h4>General system Settings</h4><hr>
-        <a href="" class="btn btn-lg btn-primary">View System Log </a>
+  <!<h4>General system Settings</h4><hr>
+        <a href="" class="btn btnlg btnprimary">View System Log </a>
         <hr>
      Lab Privacy Mode: (STUDENT VERIFICATION)
         <hr>
-    -->
-  <div class="col-md-6">
+    >
+  <div class="colmd6">
     <h4> User Account Management </h4>
     <hr>
 
@@ -43,51 +43,51 @@ if ($_SESSION['user_type'] != "Lecturer") {
 
     <div class="container">
 
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist">
+      <! Nav tabs >
+      <ul class="nav navtabs" role="tablist">
 
-        <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#home">Create New Account</a>
+        <li class="navitem">
+          <a class="navlink active" datatoggle="tab" href="#home">Create New Account</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#menu2" id="batch_tab">Batch Create New Student Accounts</a>
+        <li class="navitem">
+          <a class="navlink" datatoggle="tab" href="#menu2" id="batch_tab">Batch Create New Student Accounts</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#menu1" id="existing_accounts_tab">Existing Accounts</a>
+        <li class="navitem">
+          <a class="navlink" datatoggle="tab" href="#menu1" id="existing_accounts_tab">Existing Accounts</a>
         </li>
 
       </ul>
 
-      <!-- Tab panes -->
-      <div class="tab-content">
+      <! Tab panes >
+      <div class="tabcontent">
 
-        <div id="home" class="container tab-pane active"><br>
+        <div id="home" class="container tabpane active"><br>
 
           <b>Create Lecturer/TA Accounts </b>
           <form method="post" action="Script.php" id="create_account_form">
             <input type="hidden" name="frm_createlecturrer" value="true" required="" />
             Full_Name
-            <input type="text" name="fullname" placeholder="Full Name" class="form-control" required="">
+            <input type="text" name="fullname" placeholder="Full Name" class="formcontrol" required="">
             Email
-            <input type="text" name="email" placeholder="Email / Student Number" class="form-control" required="">
+            <input type="text" name="email" placeholder="Email / Student Number" class="formcontrol" required="">
 
             Passport_Number / ID (Used as Intial Password)
-            <input type="text" class="form-control" name="passport" placeholder="Passport No./ID" required="">
+            <input type="text" class="formcontrol" name="passport" placeholder="Passport No./ID" required="">
             <br> User Type :
             <input type="radio" name="type" value="Lecturer" required="" id="role_lecturer"> Lecturer
             <input type="radio" name="type" value="TA" required="" id="role_TA"> T/A
-            <input type="submit" class="btn btn-primary" value="Create" id="create_btn"><br>
+            <input type="submit" class="btn btnprimary" value="Create" id="create_btn"><br>
             <?php
 
             error_reporting(E_ALL);
             if (isset($_SESSION['info_Admin_Users'])) {
-              echo  '<hr><div class="alert alert-info" role="alert">' . $_SESSION['info_Admin_Users'] . '</div>';
+              echo  '<hr><div class="alert alertinfo" role="alert">' . $_SESSION['info_Admin_Users'] . '</div>';
               $_SESSION['info_Admin_Users'] = null;
             }
             if (isset($_SESSION['info_Admin_Users'])) {
-              echo  '<hr><div class="alert alert-info" role="alert">' . $_SESSION['info_Admin_Users'] . '</div>';
+              echo  '<hr><div class="alert alertinfo" role="alert">' . $_SESSION['info_Admin_Users'] . '</div>';
               $_SESSION['info_Admin_Users'] = null;
             }
 
@@ -99,10 +99,10 @@ if ($_SESSION['user_type'] != "Lecturer") {
 
         </div>
 
-        <div id="menu1" class="container tab-pane fade"><br>
+        <div id="menu1" class="container tabpane fade"><br>
 
-          <table class="table-bordered" style="font-size: 10pt;">
-            <tr style="font-size:10pt;">
+          <table class="tablebordered" style="fontsize: 10pt;">
+            <tr style="fontsize:10pt;">
               <th>ID</th>
               <th>Name</th>
               <th>Email</th>
@@ -118,13 +118,13 @@ if ($_SESSION['user_type'] != "Lecturer") {
             );
             while ($row = mysqli_fetch_assoc($result)) {
               $pass = $row['Passport_Number'];
-              $btn = "<button class='btn-primary' onclick=\"updatePass(" . $row['User_ID'] . ",'$pass')\">Reset</button>";
+              $btn = "<button class='btnprimary' onclick=\"updatePass(" . $row['User_ID'] . ",'$pass')\">Reset</button>";
               if ($row['Status'] == "Active") {
                 $newstatus = "Blocked";
-                $btnBlock = "<button class='btn-danger' onclick=\"blockUser(" . $row['User_ID'] . ",'$newstatus')\" id=\"block_account_1\">Block</button>";
+                $btnBlock = "<button class='btndanger' onclick=\"blockUser(" . $row['User_ID'] . ",'$newstatus')\" id=\"block_account_1\">Block</button>";
               } else {
                 $newstatus = "Active";
-                $btnBlock = "<button class='btn-success' onclick=\"blockUser(" . $row['User_ID'] . ",'$newstatus')\" id=\"activate_account_1\">Activate</button>";
+                $btnBlock = "<button class='btnsuccess' onclick=\"blockUser(" . $row['User_ID'] . ",'$newstatus')\" id=\"activate_account_1\">Activate</button>";
               }
 
               echo "<tr><td>" . $row['User_ID'] . "</td><td>" . $row['Full_Name'] . "</td><td>" . $row['Email'] . "</td> <td>" . $row['Passport_Number'] . "</td><td>$btn</td><td>$btnBlock</td></tr>";
@@ -134,15 +134,15 @@ if ($_SESSION['user_type'] != "Lecturer") {
 
         </div>
 
-        <!-- code contributed by Xu Xiaopeng (https://github.com/xxp1999) -->
+        <! code contributed by Xu Xiaopeng (https://github.com/xxp1999) >
 
-        <div id="menu2" class="container tab-pane fade" style="margin-top:10px">
+        <div id="menu2" class="container tabpane fade" style="margintop:10px">
           <b>Separate two student numbers with a space.</b><br>
           <form action="batch_insert.php" method="post" id="batch_form">
             <p>
               <textarea cols="80" rows="16" name="users" required=""></textarea>
             </p>
-            <input type="submit" class="btn btn-primary" value="Register Students" id="register_btn"><br>
+            <input type="submit" class="btn btnprimary" value="Register Students" id="register_btn"><br>
           </form>
         </div>
 
@@ -151,26 +151,26 @@ if ($_SESSION['user_type'] != "Lecturer") {
 
   </div>
 
-  <div class="col-md-6">
+  <div class="colmd6">
 
     <div class="container">
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#menub" id="existing_courses">Existing Courses</a>
+      <! Nav tabs >
+      <ul class="nav navtabs" role="tablist">
+        <li class="navitem">
+          <a class="navlink active" datatoggle="tab" href="#menub" id="existing_courses">Existing Courses</a>
         </li>
 
       </ul>
 
-      <!-- Tab panes -->
+      <! Tab panes >
 
         </div>
 
-        <div id="menub" class="container tab-pane active"><br>
+        <div id="menub" class="container tabpane active"><br>
 
           <b> Existing Course Portals </b>
           <hr>
-          <table class="table-bordered" style="font-size: 10pt;">
+          <table class="tablebordered" style="fontsize: 10pt;">
             <tr>
               <th>Course Name </th>
               <th> Faculty </th>
@@ -198,11 +198,11 @@ where course_ta.Course_ID=$c_id");
 
                 $ta = "";
                 while ($rowTA = mysqli_fetch_assoc($resultTA)) {
-                  $ta = $ta . "  - " . $rowTA['TA_NAME'];
+                  $ta = $ta . "   " . $rowTA['TA_NAME'];
                 }
 
                 echo "  
-                          <tr> <td>$code - $name</td>  <td>$faculty </td> <td>$lecturer</td><td>$ta</td>  <td><form method='get' action='Script.php' id='drop_menu_form_$counter'> <select name='ta' class=''>";
+                          <tr> <td>$code  $name</td>  <td>$faculty </td> <td>$lecturer</td><td>$ta</td>  <td><form method='get' action='Script.php' id='drop_menu_form_$counter'> <select name='ta' class=''>";
 
                 $resultx = mysqli_query($con, "SELECT * FROM Users_Table WHERE UserType='TA'");
                 if (mysqli_num_rows($resultx) == 0) {
